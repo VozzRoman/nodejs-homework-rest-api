@@ -1,12 +1,11 @@
 
 const createError = require('http-errors');
-const {getContactById} = require('../../models/contacts')
-
+const Contact = require('../../models/contact') // импорт модели
 const getByIdController = async (req, res) => {
 	
 		const {id} = req.params;
 		console.log('ID',req.params);
-		const contact = await getContactById(id);
+		const contact = await Contact.findById(id);
 		console.log('CONTACT====>', contact);
 		if(!contact){
 			throw createError(404, `user with id=${id} not found`) // с плагином
