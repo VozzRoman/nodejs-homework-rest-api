@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-//////Reday
 
 const {
   listController,
@@ -8,10 +7,10 @@ const {
   addController,
   removeController,
   updateControllers,
-  updateStatusControllers
+  updateStatusControllers,
 } = require("../../controllers/contacts");
 
-const ctrlWrapper = require('../../middlewares/ctrWrapper');
+const ctrlWrapper = require("../../middlewares/ctrWrapper");
 
 router.get("/", ctrlWrapper(listController));
 

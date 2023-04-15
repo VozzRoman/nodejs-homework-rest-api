@@ -9,7 +9,6 @@ const removeController = async (req, res) => {
   if (!contact) {
     throw createError(404, `user with id=${id} not found`);
   }
-  // console.log('REMOVE2===>', contact);
   res.status(200).json({
     message: "contact deleted",
     status: "success",

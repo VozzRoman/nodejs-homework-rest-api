@@ -1,5 +1,4 @@
-
-const Contact = require('../../models/contact');
+const Contact = require("../../models/contact");
 
 const validateSchema = require("../../utils/schema");
 
