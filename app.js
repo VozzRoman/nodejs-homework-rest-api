@@ -2,7 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 require('dotenv').config(); // пакет для поиска файлов .env
-//Ready
+//hw-04
 const contactsRouter = require('./routes/api/contacts')
 
 
