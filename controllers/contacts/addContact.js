@@ -1,4 +1,4 @@
-const { addContact } = require("../../models/contacts");
+const Contact = require("../../models/contact");
 
 const validateSchema = require("../../utils/schema");
 
@@ -8,7 +8,7 @@ const addController = async (req, res) => {
     error.status = 400;
     throw error;
   }
-  const newContact = await addContact(req.body);
+  const newContact = await Contact.create(req.body);
   res.status(201).json({
     status: "success",
     code: 201,
