@@ -3,7 +3,7 @@ const {Unauthorized} = require('http-errors')
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const {SECRET_KEY} = process.env;
-
+//hw-05
 
 
 const auth = async(req, res, next) => {
@@ -11,7 +11,7 @@ const {authorization = ""} = req.headers;
 
 const [bearer, token] = authorization.split(' ');
 try {
-	if(bearer !== 'Bearer') {
+	if(bearer !== 'Bearer' || !token) {
 		throw new Unauthorized("No authorized");
 	}
 	const {id} = jwt.verify(token, SECRET_KEY);
