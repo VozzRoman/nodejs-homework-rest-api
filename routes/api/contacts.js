@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require('../../middlewares/auth');
 
 const {
   listController,
@@ -12,11 +13,11 @@ const {
 
 const ctrlWrapper = require("../../middlewares/ctrWrapper");
 
-router.get("/", ctrlWrapper(listController));
+router.get("/", auth, ctrlWrapper(listController));
 
 router.get("/:id", ctrlWrapper(getByIdController));
 
-router.post("/", ctrlWrapper(addController));
+router.post("/", auth, ctrlWrapper(addController));
 
 router.delete("/:id", ctrlWrapper(removeController));
 
