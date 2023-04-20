@@ -24,6 +24,10 @@ const userSchema = new Schema({
 		  type: String,
 		  default: null,
 		},
+		avataruRL: {
+			type: String,
+			require: true
+		}
 
 
  });
