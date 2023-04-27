@@ -29,7 +29,7 @@ const verificationToken = v4();
 const mail = {
 	to: email,
 	subject: 'Подтверждение email',
-	html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Подтверждение Email</a>`
+	html: `<a target="_blank" href="http://localhost:4000/api/users/verify/${verificationToken}">Подтверждение Email</a>`
 }
 await sendMail(mail);
 
@@ -37,8 +37,8 @@ await sendMail(mail);
 	user: {
 		email,
 		subscription: result.subscription,
-		avataruRL,
-		verificationToken
+		avataruRL: result.avataruRL,
+		verificationToken: result.verificationToken
 	 }
  })
 }
