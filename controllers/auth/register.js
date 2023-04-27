@@ -1,7 +1,10 @@
 const {Conflict} = require('http-errors');
+const gravatar = require('gravatar');
 const {userSchema}= require('../../utils/index');
+const {v4} = require('uuid');
 const User = require('../../models/user');
 const bcrypt = require('bcryptjs');
+const sendMail = require('../../sendGrid/sendGrid');
 
 const register = async (req, res) => {
 
@@ -15,13 +18,27 @@ const register = async (req, res) => {
  if(user) {
 	throw new Conflict(`Email ${email} already in use`);
  }
+ const avataruRL = gravatar.url(email);
  const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10)); // хеш пароля
- const result = await User.create({name, email, password: hashPassword, subscription});
+
+const verificationToken = v4();
+
+ const result = await User.create({name, email, password: hashPassword, subscription, avataruRL, verificationToken});
  console.log("RESULT---->", result)
+
+const mail = {
+	to: email,
+	subject: 'Подтверждение email',
+	html: `<a target="_blank" href="http://localhost:4000/api/users/verify/${verificationToken}">Подтверждение Email</a>`
+}
+await sendMail(mail);
+
  res.status(201).json({
 	user: {
 		email,
 		subscription: result.subscription,
+		avataruRL: result.avataruRL,
+		verificationToken: result.verificationToken
 	 }
  })
 }

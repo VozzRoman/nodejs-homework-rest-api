@@ -9,7 +9,8 @@ const { favorite } = req.query;
 const skip = (page -1)* limit;
 	console.log("REQ_Body", req.user);
 	const {_id} = req.user; //контакты юзера с эти айди
-  const contacts = await Contact.find({owner: _id, favorite: favorite}, "", {skip, limit: Number(limit)}).populate('owner', "_id name email");
+	console.log("OWNER-ID", _id);
+  const contacts = await Contact.find({owner: _id}, "", {skip, limit: Number(limit)}).populate('owner', "_id name email");
   console.log("DATA2===>", contacts);
   res.json({
     status: "success",
